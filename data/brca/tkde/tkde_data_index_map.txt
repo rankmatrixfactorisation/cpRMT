@@ -1,0 +1,5 @@
+start	end	duplicated
+mrna	0	1760	0
+mirna	1761	1898	0
+protein	1899	2029	0
+cnv	2030	2111	0
