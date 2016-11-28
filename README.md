@@ -57,7 +57,7 @@ Other parameters should be ignored (they will be removed soon).
 
 ### Typical run
 
-/path/to/java -Xmx2048m -jar /path/to/cpRMTRunner.jarr -f /rankfile.txt -useLNS -useOrderingHeuristic -k 8 -n 1 -theta 0.65 -dir /path/to/working/directory/
+/path/to/java -Xmx2048m -jar /path/to/cpRMTRunner.jar -f /rankfile.txt -useLNS -useOrderingHeuristic -k 8 -n 1 -theta 0.65 -dir /path/to/working/directory/
 
 Citation
 ------------------------
