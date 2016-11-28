@@ -17,75 +17,47 @@ Setup
 
 ### Compilation
 
+First, use Eclipse IDE for Scale (http://scala-ide.org/) to import the two projects in the src subfolder, including cpRMT and cpRMTWrapper. Then, use the export tool of the IDE to package file cpRMTWrapper/cpRMTRunner.java into a jar file named cpRMTRunner.jar.
 
+How to compile the project using sbt tool will be added soon.
 
 
 Run
 ------------------------
 
-### Set up enviroment variables for Gurobi
-SRF uses Gurobi to solve the optimisation problem. Hence, before running SRF, make sure that
-Gurobi is installed and its enviroment variables are setup correctly.
+### Help
+
+ /path/to/java -jar /path/to/cpRMTRunner.jar -help
 
 ## Parameters
 
         =============================================================================================================
         | PARAMETER NAME          | DEFAULT            | DESCRIPTION                                                |
         =============================================================================================================
-        |-df          	          | None               |Absolute path to the tab-separated ranked diffusion file    |
-        |                         |                    |where each row contains                                     |
+        |-f          	          | None               |Rank file                                     |
         -------------------------------------------------------------------------------------------------------------
-        |-ef                      | None               |Absolute path to the tab-separated ranked expression file   |
+        |-useLNS                  | false              |Use large neighbourhood search  |
         |                         |                    |                                 			    |
         -------------------------------------------------------------------------------------------------------------
-        |-if       		  | None	       |Initialised matrix F obtained by a hierarchical 		  
-        |                         |                    |clustering.                   				    |
+        |-useOrderingHeuristic    | false	       |Use the heuristic described in [1] to order variables when         searching|                        
         -------------------------------------------------------------------------------------------------------------        
-        |-k                       | 5                  |Number of ranked factors                                    |
+        |-k                       | 5                  |Number of patterns                                          |
         |                         |                    |                                                            |
         -------------------------------------------------------------------------------------------------------------
-        |-etheta                  | 0.65               |Rank expression threshold (\theta_2 in the paper)           |
-        |                         |                    |Remember that it is a number in the range of [0..1]         |
-        |                         |                    |The actual integer threshold that is used in the program is |
-        |                         |                    |calculated as followed: \theta_2 * n, where n is the number |
-        |                         |                    |of the columns of the rank matrix.                          |
-        -------------------------------------------------------------------------------------------------------------
-        |-dtheta                  | 0.86               |Rank diffusion threshold (\theta_1 in the paper)            |
-        |                         |                    |Remember that it is a number in the range of [0..1]         |
-        |                         |                    |The actual integer threshold that is used in the program is |
-        |                         |                    |calculated as followed: \theta_1 * maxD, where maxD is the  |
-        |                         |                    |user-input value specifying the maximum value of rank       |
-        |                         |                    |diffusion.						    |
-        -------------------------------------------------------------------------------------------------------------
-        |-beta                    | 1                  |The rank imbalance threshold used to specify the relative 
-        |                         |                    |importance between mutation data and expression data.       |
-        |                         |                    |                                                            |
-        -------------------------------------------------------------------------------------------------------------
-        |-k                       | 5                  |Number of ranked factors                                    |
-        |                         |                    |                                                            |
-        -------------------------------------------------------------------------------------------------------------
-        |-nReqMut                 | 2                  |Number of required mutations                                |
-        |                         |                    |                                                            |
-        -------------------------------------------------------------------------------------------------------------
-        |-maxD                    | 0                  |Maximum value of ranked diffusion. This should be equal to  |
-        |                         |                    |the number of vertices in the graph used to run the         |
-        |                         |		       |diffusion. Note that if maxD = 0, the program               |
-	|			  |                    |uses the number of rows of the ranked diffusion matrix      |
-        |                         |                    |the maximum value of ranked diffusion.			    |
-        -------------------------------------------------------------------------------------------------------------
-        |-maxE                    | 0                  |Maximum value of ranked expression. This should be equal to |
-        |                         |                    |the number of the columns of the ranked expression          |
-        |                         |                    |matrix. Note that if maxE = 0 or is not specified,          |
-	|                         |                    |the program automatically uses the number of the columns    |
-        |                         |                    |of the ranked expression matrix the maximum value of ranked | 		|                         |                    |expression.			                            |
+        |-theta                   | 0.5                |Theta threshold                                             |       
         -------------------------------------------------------------------------------------------------------------
         |-dir                     | ./                 |Working directory which will be used to store the results   |
         |                         |                    |                                                            |
         -------------------------------------------------------------------------------------------------------------
-        |-log                     | false              |Log intermediate results into files                         |
+        |-n                       | 1                  |Number of repeats
         |                         |                    |                                                            |
         -------------------------------------------------------------------------------------------------------------
 
+Other parameters should be ignored (they will be removed soon).
+
+### Typical run
+
+/path/to/java -Xmx2048m -jar /path/to/cpRMTRunner.jarr -f /rankfile.txt -useLNS -useOrderingHeuristic -k 8 -n 1 -theta 0.65 -dir /path/to/working/directory/
 
 Citation
 ------------------------
